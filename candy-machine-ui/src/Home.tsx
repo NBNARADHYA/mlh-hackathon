@@ -11,7 +11,7 @@ const Home = () => {
   let navigate = useNavigate();
 
   return (
-    <Container style={{ marginTop: 100 }}>
+    <Container style={{ paddingTop: 200 }}>
       <Container
         maxWidth="xs"
         style={{

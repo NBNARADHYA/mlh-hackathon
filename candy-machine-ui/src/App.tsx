@@ -2,6 +2,8 @@ import "./App.css";
 import { useMemo } from "react";
 import * as anchor from "@project-serum/anchor";
 import Home from "./Home";
+// @ts-ignore
+import video from "./assets/video.mp4";
 
 import { clusterApiUrl } from "@solana/web3.js";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
@@ -69,6 +71,11 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <video id="background-video" autoPlay loop muted
+        style={{width: "100%", zIndex: "-1", position: "fixed", objectFit: "cover", height: "100%"}}
+      >
+        <source src={video} type="video/mp4"/>
+      </video>
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets} autoConnect>
           <WalletDialogProvider>
