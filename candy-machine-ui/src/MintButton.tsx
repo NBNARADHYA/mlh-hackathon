@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
-import { CandyMachineAccount } from './candy-machine';
-import { CircularProgress } from '@material-ui/core';
-import { GatewayStatus, useGateway } from '@civic/solana-gateway-react';
-import { useEffect, useState } from 'react';
+import styled from "styled-components";
+import Button from "@material-ui/core/Button";
+import { CandyMachineAccount } from "./candy-machine";
+import { CircularProgress } from "@material-ui/core";
+import { GatewayStatus, useGateway } from "@civic/solana-gateway-react";
+import { useEffect, useState } from "react";
 
 export const CTAButton = styled(Button)`
   width: 100%;
@@ -37,14 +37,14 @@ export const MintButton = ({
 
   const getMintButtonContent = () => {
     if (candyMachine?.state.isSoldOut) {
-      return 'SOLD OUT';
+      return "SOLD OUT";
     } else if (isMinting) {
       return <CircularProgress />;
     } else if (candyMachine?.state.isPresale) {
-      return 'PRESALE MINT';
+      return "PRESALE MINT";
     }
 
-    return 'MINT';
+    return "Mint a 1-on-1 NFT Badge";
   };
 
   return (
