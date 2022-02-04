@@ -20,6 +20,9 @@ import { Header } from './Header';
 import { MintButton } from './MintButton';
 import { GatewayProvider } from '@civic/solana-gateway-react';
 
+// @ts-ignore
+import backgroundVideo from './backgroundVideo2.mp4';
+
 const ConnectButton = styled(WalletDialogButton)`
   width: 100%;
   height: 60px;
@@ -164,6 +167,11 @@ const Home = (props: HomeProps) => {
   return (
     <Container style={{ marginTop: 100 }}>
       <Container maxWidth="xs" style={{ position: 'relative' }}>
+        {/*video code*/}
+
+        {/*<video autoPlay loop muted id='video'>*/}
+        {/*  <source src = {backgroundVideo} type='video/mp4'/>*/}
+        {/*</video>*/}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32, color: '#fff' }}>
           Pod 22.1.11 1on1 Badges MC
         </div>
