@@ -164,6 +164,9 @@ const Home = (props: HomeProps) => {
   return (
     <Container style={{ marginTop: 100 }}>
       <Container maxWidth="xs" style={{ position: 'relative' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32, color: '#fff' }}>
+          Pod 22.1.11 1on1 Badges MC
+        </div>
         <Paper
           style={{ padding: 24, backgroundColor: '#151A1F', borderRadius: 6 }}
         >
