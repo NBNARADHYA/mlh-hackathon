@@ -2,14 +2,7 @@ import { useEffect, useMemo, useState, useCallback } from "react";
 import * as anchor from "@project-serum/anchor";
 
 import styled from "styled-components";
-import {
-  Container,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Snackbar,
-} from "@material-ui/core";
+import { Container, Snackbar } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Alert from "@material-ui/lab/Alert";
 import { PublicKey } from "@solana/web3.js";
@@ -26,7 +19,7 @@ import { AlertState } from "./utils";
 import { Header } from "./Header";
 import { MintButton } from "./MintButton";
 import { GatewayProvider } from "@civic/solana-gateway-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ConnectButton = styled(WalletDialogButton)`
   width: 100%;
@@ -41,7 +34,7 @@ const ConnectButton = styled(WalletDialogButton)`
 
 const MintContainer = styled.div``; // add your owns styles here
 
-export interface HomeProps {
+export interface MintProps {
   candyMachineId?: anchor.web3.PublicKey;
   connection: anchor.web3.Connection;
   startDate: number;
@@ -49,7 +42,7 @@ export interface HomeProps {
   rpcHost: string;
 }
 
-const Home = (props: HomeProps) => {
+const Mint = (props: MintProps) => {
   const [isUserMinting, setIsUserMinting] = useState(false);
   const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
   const [alertState, setAlertState] = useState<AlertState>({
@@ -57,10 +50,13 @@ const Home = (props: HomeProps) => {
     message: "",
     severity: undefined,
   });
-  let navigate = useNavigate();
 
   const rpcUrl = props.rpcHost;
   const wallet = useWallet();
+
+  const { pod_member: podMember } = useParams();
+
+  const navigate = useNavigate();
 
   const anchorWallet = useMemo(() => {
     if (
@@ -170,41 +166,25 @@ const Home = (props: HomeProps) => {
     refreshCandyMachineState,
   ]);
 
+  if (podMember !== "mikael") {
+    return (
+      <Container style={{ marginTop: 100 }}>
+        <Snackbar
+          open={true}
+          autoHideDuration={6000}
+          onClose={() => navigate("/")}
+        >
+          <Alert onClose={() => navigate("/")} severity={"warning"}>
+            Sorry! The mint is currently under construction
+          </Alert>
+        </Snackbar>
+      </Container>
+    );
+  }
+
   return (
     <Container style={{ marginTop: 100 }}>
-      <Container
-        maxWidth="xs"
-        style={{
-          position: "relative",
-          color: "white",
-          marginBottom: 100,
-          textAlign: "center",
-        }}
-      >
-        Welcome! You can mint 1-on-1 NFT badges from your POD 22.1.11 mates
-      </Container>
-      <Container
-        maxWidth="xs"
-        style={{ position: "relative", textAlign: "center" }}
-      >
-        <FormControl fullWidth>
-          <InputLabel>Select Pod Member</InputLabel>
-          <Select
-            // value={podMember}
-            label="Select Pod Member"
-            onChange={(e) => {
-              const podMember: string = e.target.value as string;
-              navigate(`/mint/${podMember}`);
-            }}
-          >
-            <MenuItem value={"mikael"}>Mikael Carpenter</MenuItem>
-            <MenuItem value={"nikhil"}>Nikhil B N</MenuItem>
-            <MenuItem value={"christian"}>Christian Garcia</MenuItem>
-            <MenuItem value={"miguel"}>Jose Miguel Sarenas</MenuItem>
-          </Select>
-        </FormControl>
-      </Container>
-      {/* <Container maxWidth="xs" style={{ position: "relative" }}>
+      <Container maxWidth="xs" style={{ position: "relative" }}>
         <Paper
           style={{ padding: 24, backgroundColor: "#151A1F", borderRadius: 6 }}
         >
@@ -249,7 +229,8 @@ const Home = (props: HomeProps) => {
             </>
           )}
         </Paper>
-      </Container> */}
+      </Container>
+
       <Snackbar
         open={alertState.open}
         autoHideDuration={6000}
@@ -266,4 +247,4 @@ const Home = (props: HomeProps) => {
   );
 };
 
-export default Home;
+export default Mint;
