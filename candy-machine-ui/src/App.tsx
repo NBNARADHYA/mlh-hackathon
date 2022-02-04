@@ -71,10 +71,21 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <video id="background-video" autoPlay loop muted
-        style={{width: "100%", zIndex: "-1", position: "fixed", objectFit: "cover", height: "100%"}}
+      <video
+        id="background-video"
+        autoPlay
+        loop
+        muted
+        style={{
+          width: "100%",
+          zIndex: "-1",
+          position: "fixed",
+          objectFit: "cover",
+          height: "100%",
+          top: "0px",
+        }}
       >
-        <source src={video} type="video/mp4"/>
+        <source src={video} type="video/mp4" />
       </video>
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets} autoConnect>
