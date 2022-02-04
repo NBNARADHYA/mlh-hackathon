@@ -74,18 +74,7 @@ const App = () => {
           <WalletDialogProvider>
             <BrowserRouter>
               <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <Home
-                      candyMachineId={candyMachineId}
-                      connection={connection}
-                      startDate={startDateSeed}
-                      txTimeout={txTimeoutInMilliseconds}
-                      rpcHost={rpcHost}
-                    />
-                  }
-                />
+                <Route path="/" element={<Home />} />
                 <Route
                   path="/mint/:pod_member"
                   element={
